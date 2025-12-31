@@ -301,8 +301,23 @@ function updateGameUI(data) {
 
     if (card) {
         const cardImageUrl = `/cards/${card.image_path}`;
-        document.getElementById('card-front').style.backgroundImage = `url('${cardImageUrl}')`;
-        document.getElementById('card-back').style.backgroundImage = `url('${cardImageUrl}')`;
+        const loader = document.getElementById('card-loader');
+
+        // Show loader
+        loader.classList.add('loading');
+
+        // Preload image
+        const img = new Image();
+        img.onload = () => {
+            document.getElementById('card-front').style.backgroundImage = `url('${cardImageUrl}')`;
+            document.getElementById('card-back').style.backgroundImage = `url('${cardImageUrl}')`;
+            loader.classList.remove('loading');
+        };
+        img.onerror = () => {
+            loader.classList.remove('loading');
+        };
+        img.src = cardImageUrl;
+
         state.currentCardType = card.card_type;
 
         // Reset card to back side (unflipped) for new card

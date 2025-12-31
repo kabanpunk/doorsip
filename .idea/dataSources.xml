@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5433/doorsip</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="doorsip@72.56.97.221" uuid="63b1c3d3-1322-4f79-bb87-874a5181755c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://72.56.97.221:5433/doorsip</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
