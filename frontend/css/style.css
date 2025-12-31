@@ -473,10 +473,14 @@ h2 {
 
 .card-flipper {
     position: relative;
+    width: 280px;
     height: 400px;
     max-height: 60vh;
-    aspect-ratio: 997 / 1424;
     max-width: 100%;
+    /* Fallback for iOS Safari - calculate width from height */
+    /* Card half is 498.5x731, ratio ~0.682 */
+    aspect-ratio: 498.5 / 731;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
     cursor: pointer;
@@ -493,7 +497,8 @@ h2 {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border: 3px solid #1a1a1a;
-    background-size: 200% auto;
+    -webkit-background-size: 200% 100%;
+    background-size: 200% 100%;
     background-repeat: no-repeat;
 }
 
