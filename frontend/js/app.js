@@ -428,8 +428,45 @@ function flipCard() {
     flipper.classList.toggle('flipped', state.cardFlipped);
 }
 
+function launchConfetti() {
+    // Remove existing confetti container if any
+    const existingContainer = document.querySelector('.confetti-container');
+    if (existingContainer) {
+        existingContainer.remove();
+    }
+
+    const container = document.createElement('div');
+    container.className = 'confetti-container';
+    document.body.appendChild(container);
+
+    const colors = ['#ff3366', '#00e5ff', '#ffeb3b', '#69f0ae', '#e040fb', '#ff9800', '#fff'];
+    const shapes = ['square', 'circle', 'strip'];
+    const confettiCount = 150;
+
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+        confetti.className = `confetti ${shape}`;
+        confetti.style.backgroundColor = color;
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = -20 + 'px';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confetti.style.animationDelay = Math.random() * 1.5 + 's';
+
+        container.appendChild(confetti);
+    }
+
+    // Clean up after animation
+    setTimeout(() => {
+        container.remove();
+    }, 5000);
+}
+
 async function showResults() {
     showScreen('results-screen');
+    launchConfetti();
 
     try {
         const response = await fetch(`${API_URL}/rooms/${state.roomCode}/leaderboard`);

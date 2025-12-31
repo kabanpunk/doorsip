@@ -766,6 +766,52 @@ h2 {
     border-color: #1a1a1a;
 }
 
+/* Confetti */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    animation: confetti-fall linear forwards;
+}
+
+.confetti.square {
+    border: 3px solid #1a1a1a;
+}
+
+.confetti.circle {
+    border-radius: 50%;
+    border: 2px solid #1a1a1a;
+}
+
+.confetti.strip {
+    width: 8px;
+    height: 20px;
+    border: 2px solid #1a1a1a;
+}
+
+@keyframes confetti-fall {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg) scale(0.5);
+    }
+}
+
 /* Mobile adjustments */
 @media (max-width: 500px) {
     .logo {

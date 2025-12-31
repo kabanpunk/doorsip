@@ -62,6 +62,7 @@ class Player(Base):
     is_host = Column(Boolean, default=False)
     drink_score = Column(Integer, default=0)
     action_score = Column(Integer, default=0)
+    play_order = Column(Integer, nullable=True, default=None)  # Order in game (None for host)
 
     room = relationship("Room", back_populates="players")
 
