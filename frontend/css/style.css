@@ -1,0 +1,760 @@
+@font-face {
+    font-family: 'Pershotravneva';
+    src: url('/fonts/Pershotravneva55.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive, sans-serif;
+    background-color: #ffeb3b;
+    background-image:
+        radial-gradient(circle, #000 1px, transparent 1px),
+        radial-gradient(circle, #000 1px, transparent 1px);
+    background-size: 8px 8px, 8px 8px;
+    background-position: 0 0, 4px 4px;
+    min-height: 100vh;
+    color: #1a1a1a;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.03) 2px,
+            rgba(0,0,0,0.03) 4px
+        );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+#app {
+    min-height: 100vh;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    padding: 40px 30px;
+    border: 4px solid #1a1a1a;
+    border-radius: 3px;
+    box-shadow:
+        8px 8px 0 #1a1a1a,
+        12px 12px 0 #ff6b6b;
+    position: relative;
+    transform: rotate(-1deg);
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 10%;
+    right: 10%;
+    height: 16px;
+    background:
+        linear-gradient(135deg, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%),
+        linear-gradient(225deg, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%);
+    background-size: 20px 16px;
+    border-top: 4px solid #1a1a1a;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 15%;
+    right: 15%;
+    height: 16px;
+    background:
+        linear-gradient(45deg, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%),
+        linear-gradient(-45deg, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%);
+    background-size: 20px 16px;
+    border-bottom: 4px solid #1a1a1a;
+}
+
+.logo {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #ff3366;
+    text-shadow:
+        4px 4px 0 #1a1a1a,
+        -2px -2px 0 #1a1a1a,
+        2px -2px 0 #1a1a1a,
+        -2px 2px 0 #1a1a1a;
+    margin-bottom: 10px;
+    transform: rotate(2deg);
+    letter-spacing: -3px;
+}
+
+.tagline {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 40px;
+    transform: rotate(-1deg);
+    background: #00e5ff;
+    display: inline-block;
+    padding: 5px 20px;
+    border: 3px solid #1a1a1a;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    padding: 18px 35px;
+    font-size: 1.3rem;
+    border: 4px solid #1a1a1a;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    box-shadow: 5px 5px 0 #1a1a1a;
+}
+
+.btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0 #1a1a1a;
+}
+
+.btn:active {
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+.btn-primary {
+    background: #ff3366;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #ff1a53;
+}
+
+.btn-secondary {
+    background: #00e5ff;
+    color: #1a1a1a;
+}
+
+.btn-secondary:hover {
+    background: #00d4ed;
+}
+
+.btn-back {
+    background: #fff;
+    color: #1a1a1a;
+    border: 3px dashed #1a1a1a;
+    box-shadow: none;
+}
+
+.btn-back:hover {
+    background: #f5f5f5;
+    transform: none;
+}
+
+.btn-large {
+    padding: 25px 60px;
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: #1a1a1a;
+    text-shadow: 2px 2px 0 #ffeb3b;
+    transform: rotate(-1deg);
+}
+
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-group label {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    display: block;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.form-group input {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    border: 3px solid #1a1a1a;
+    border-radius: 0;
+    background: #fff;
+    color: #1a1a1a;
+    transition: all 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ff3366;
+    box-shadow: 4px 4px 0 #ff3366;
+}
+
+.form-group input::placeholder {
+    color: #999;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.buttons .btn {
+    flex: 1;
+}
+
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.game-item {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    padding: 18px;
+    background: #fff;
+    border: 3px solid #1a1a1a;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.game-item:hover {
+    background: #f0f0f0;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+.game-item.selected {
+    background: #ff3366;
+    color: #fff;
+    transform: rotate(1deg);
+}
+
+.game-item.selected p {
+    color: rgba(255,255,255,0.8);
+}
+
+.game-item h4 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.game-item p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.loading {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    color: #666;
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+/* Lobby */
+#lobby .container {
+    transform: rotate(0.5deg);
+}
+
+.game-name {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.players-section {
+    background: #00e5ff;
+    border: 4px solid #1a1a1a;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 5px 5px 0 #1a1a1a;
+    transform: rotate(-0.5deg);
+}
+
+.players-section h3 {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    margin-bottom: 15px;
+    color: #1a1a1a;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+}
+
+.players-section ul {
+    list-style: none;
+}
+
+.players-section li {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    padding: 12px 18px;
+    background: #fff;
+    margin-bottom: 10px;
+    border: 3px solid #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.players-section li .host-badge {
+    background: #ff3366;
+    color: #fff;
+    padding: 5px 12px;
+    border: 2px solid #1a1a1a;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.host-controls {
+    margin-top: 25px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.waiting-msg {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    color: #666;
+    margin-top: 25px;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+/* Game Screen */
+#game-screen {
+    position: relative;
+    padding: 0;
+    background-color: #9c27b0;
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+    background-size: 10px 10px, 10px 10px;
+    background-position: 0 0, 5px 5px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.turn-info {
+    text-align: center;
+    margin-bottom: 25px;
+    background: #fff;
+    padding: 15px 30px;
+    border: 4px solid #1a1a1a;
+    box-shadow: 5px 5px 0 #1a1a1a;
+    transform: rotate(-1deg);
+}
+
+.turn-info p {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    color: #1a1a1a;
+    font-size: 1.1rem;
+}
+
+.current-turn {
+    font-size: 1.4rem !important;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.current-turn span {
+    color: #ff3366;
+}
+
+.card-display {
+    background: #fff;
+    border: 5px solid #1a1a1a;
+    border-radius: 0;
+    padding: 15px;
+    margin-bottom: 30px;
+    max-width: 400px;
+    width: 100%;
+    perspective: 1000px;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    transform: rotate(1deg);
+}
+
+.card-flipper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 997 / 1424;
+    max-height: 400px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    cursor: pointer;
+}
+
+.card-flipper.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 3px solid #1a1a1a;
+    background-size: 205.4% auto;
+    background-repeat: no-repeat;
+}
+
+.card-front {
+    background-position: 0% 0%;
+    transform: rotateY(180deg);
+}
+
+.card-back {
+    background-position: 100% 0%;
+}
+
+.choice-buttons {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.btn-drink {
+    background: linear-gradient(180deg, #e040fb 0%, #9c27b0 100%);
+    color: white;
+    padding: 25px 45px;
+    font-size: 1.5rem;
+    border: 5px solid #1a1a1a;
+    box-shadow: 6px 6px 0 #1a1a1a;
+    transform: rotate(-2deg);
+}
+
+.btn-drink:hover {
+    transform: rotate(-2deg) translate(2px, 2px);
+    box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.btn-action {
+    background: linear-gradient(180deg, #69f0ae 0%, #00c853 100%);
+    color: #1a1a1a;
+    padding: 25px 45px;
+    font-size: 1.5rem;
+    border: 5px solid #1a1a1a;
+    box-shadow: 6px 6px 0 #1a1a1a;
+    transform: rotate(2deg);
+}
+
+.btn-action:hover {
+    transform: rotate(2deg) translate(2px, 2px);
+    box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.btn-skip {
+    background: linear-gradient(180deg, #bdbdbd 0%, #757575 100%);
+    color: #fff;
+    padding: 25px 45px;
+    font-size: 1.5rem;
+    border: 5px solid #1a1a1a;
+    box-shadow: 6px 6px 0 #1a1a1a;
+    transform: rotate(2deg);
+}
+
+.btn-skip:hover {
+    transform: rotate(2deg) translate(2px, 2px);
+    box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.ready-button {
+    text-align: center;
+}
+
+.ready-button p {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    color: #fff;
+    background: #1a1a1a;
+    padding: 10px 25px;
+    display: inline-block;
+    transform: rotate(-1deg);
+}
+
+.btn-ready {
+    background: linear-gradient(180deg, #ffca28 0%, #ff9800 100%);
+    color: #1a1a1a;
+    padding: 25px 70px;
+    font-size: 1.5rem;
+    border: 5px solid #1a1a1a;
+    box-shadow: 6px 6px 0 #1a1a1a;
+}
+
+.btn-ready:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.waiting-turn {
+    text-align: center;
+    padding: 40px;
+}
+
+.waiting-turn p {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    font-size: 1.5rem;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    padding: 15px 30px;
+    display: inline-block;
+    border: 3px solid #fff;
+}
+
+.waiting-turn span {
+    color: #ffeb3b;
+    font-weight: bold;
+}
+
+/* Results */
+#results-screen {
+    background-color: #00c853;
+    background-image:
+        radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px),
+        radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 10px 10px, 10px 10px;
+    background-position: 0 0, 5px 5px;
+}
+
+.results-container {
+    max-width: 900px;
+    transform: rotate(0deg);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 20px;
+}
+
+.results-container::before,
+.results-container::after {
+    display: none;
+}
+
+.results-container h1 {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    font-size: 4rem;
+    margin-bottom: 50px;
+    color: #fff;
+    text-shadow:
+        5px 5px 0 #1a1a1a,
+        -3px -3px 0 #1a1a1a,
+        3px -3px 0 #1a1a1a,
+        -3px 3px 0 #1a1a1a;
+    transform: rotate(-2deg);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 700px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.result-column {
+    background: #fff;
+    border: 5px solid #1a1a1a;
+    padding: 30px;
+    box-shadow: 8px 8px 0 #1a1a1a;
+}
+
+.result-column.drink-column {
+    transform: rotate(-1deg);
+    background: #e040fb;
+}
+
+.result-column.action-column {
+    transform: rotate(1deg);
+    background: #69f0ae;
+}
+
+.result-column h2 {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+    color: #1a1a1a;
+    text-shadow: none;
+    text-transform: uppercase;
+    transform: rotate(0);
+}
+
+.final-leaderboard {
+    list-style: none;
+}
+
+.final-leaderboard li {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    background: #fff;
+    border: 4px solid #1a1a1a;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.final-leaderboard li.winner {
+    background: #ffeb3b;
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 5px 5px 0 #1a1a1a;
+}
+
+.final-leaderboard li .rank {
+    width: 40px;
+    height: 40px;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 1.3rem;
+}
+
+.final-leaderboard li.winner .rank {
+    background: #ff3366;
+}
+
+.final-leaderboard li .player-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.final-leaderboard li .score {
+    font-weight: bold;
+    font-size: 1.5rem;
+    background: #00e5ff;
+    padding: 5px 15px;
+    border: 3px solid #1a1a1a;
+}
+
+/* Toast */
+.toast {
+    font-family: 'Pershotravneva', 'Comic Sans MS', cursive;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(200%);
+    background: #1a1a1a;
+    color: white;
+    padding: 18px 35px;
+    border: 4px solid #fff;
+    transition: transform 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    font-size: 1.1rem;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    visibility: visible;
+}
+
+.toast.error {
+    background: #ff3366;
+    border-color: #1a1a1a;
+}
+
+/* Mobile adjustments */
+@media (max-width: 500px) {
+    .logo {
+        font-size: 3rem;
+    }
+
+    .container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    .choice-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-drink, .btn-action, .btn-skip {
+        padding: 20px 35px;
+        width: 100%;
+    }
+
+    .results-container h1 {
+        font-size: 2.5rem;
+    }
+
+    .result-column h2 {
+        font-size: 1.3rem;
+    }
+}

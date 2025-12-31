@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoOrSip</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen active">
+            <div class="container">
+                <h1 class="logo">DoOrSip</h1>
+                <p class="tagline">Делай или пей!</p>
+                <div class="menu-buttons">
+                    <button onclick="showScreen('create-room')" class="btn btn-primary">Создать комнату</button>
+                    <button onclick="showScreen('join-room')" class="btn btn-secondary">Присоединиться</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Room -->
+        <div id="create-room" class="screen">
+            <div class="container">
+                <h2>Создать комнату</h2>
+                <div class="form-group">
+                    <label>Твой никнейм</label>
+                    <input type="text" id="host-nickname" placeholder="Введи никнейм" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label>Выбери игру</label>
+                    <div id="games-list" class="games-list">
+                        <p class="loading">Загрузка игр...</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button onclick="createRoom()" class="btn btn-primary">Создать</button>
+                    <button onclick="showScreen('main-menu')" class="btn btn-back">Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Join Room -->
+        <div id="join-room" class="screen">
+            <div class="container">
+                <h2>Присоединиться</h2>
+                <div class="form-group">
+                    <label>Код комнаты</label>
+                    <input type="text" id="room-code-input" placeholder="ABCD12" maxlength="6">
+                </div>
+                <div class="form-group">
+                    <label>Твой никнейм</label>
+                    <input type="text" id="player-nickname" placeholder="Введи никнейм" maxlength="20">
+                </div>
+                <div class="buttons">
+                    <button onclick="joinRoom()" class="btn btn-primary">Войти</button>
+                    <button onclick="showScreen('main-menu')" class="btn btn-back">Назад</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lobby -->
+        <div id="lobby" class="screen">
+            <div class="container">
+                <h2>Комната: <span id="lobby-code"></span></h2>
+                <p class="game-name">Игра: <span id="lobby-game-name"></span></p>
+                <div class="players-section">
+                    <h3>Игроки</h3>
+                    <ul id="lobby-players"></ul>
+                </div>
+                <div id="host-controls" class="host-controls hidden">
+                    <button onclick="startGame()" class="btn btn-primary btn-large">Начать игру</button>
+                </div>
+                <p id="waiting-msg" class="waiting-msg">Ждём хоста...</p>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-container">
+                <div class="turn-info">
+                    <p>Карта <span id="card-number">1</span> из <span id="total-cards">10</span></p>
+                    <p class="current-turn">Сейчас ходит: <span id="current-player-name"></span></p>
+                </div>
+
+                <div id="card-display" class="card-display">
+                    <div id="card-flipper" class="card-flipper" onclick="flipCard()">
+                        <div class="card-face card-back" id="card-back"></div>
+                        <div class="card-face card-front" id="card-front"></div>
+                    </div>
+                </div>
+
+                <!-- Buttons for DO_OR_DRINK type -->
+                <div id="choice-buttons-do-or-drink" class="choice-buttons hidden">
+                    <button onclick="makeChoice('drink')" class="btn btn-drink">ПЕЙ!</button>
+                    <button onclick="makeChoice('action')" class="btn btn-action">СДЕЛАЙ!</button>
+                </div>
+
+                <!-- Buttons for TRUTH_OR_DRINK type -->
+                <div id="choice-buttons-truth-or-drink" class="choice-buttons hidden">
+                    <button onclick="makeChoice('drink')" class="btn btn-drink">ПЕЙ!</button>
+                    <button onclick="makeChoice('skip')" class="btn btn-skip">ПРОПУСК</button>
+                </div>
+
+                <div id="ready-button" class="ready-button hidden">
+                    <p id="choice-made-text"></p>
+                    <button onclick="confirmReady()" class="btn btn-ready">ГОТОВО!</button>
+                </div>
+
+                <div id="waiting-turn" class="waiting-turn">
+                    <p>Ждём <span id="waiting-player-name"></span>...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="container results-container">
+                <h1>Игра окончена!</h1>
+
+                <div class="results-grid">
+                    <div class="result-column drink-column">
+                        <h2>Чемпион по выпитому</h2>
+                        <ul id="final-drink-leaderboard" class="final-leaderboard"></ul>
+                    </div>
+                    <div class="result-column action-column">
+                        <h2>Чемпион по сделаному</h2>
+                        <ul id="final-action-leaderboard" class="final-leaderboard"></ul>
+                    </div>
+                </div>
+
+                <button onclick="backToMenu()" class="btn btn-primary btn-large">В главное меню</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
